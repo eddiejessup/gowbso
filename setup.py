@@ -10,7 +10,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='gowbso',
 
-    version='1.0.1',
+    version='1.0.3',
 
     description='A tool to generate CSV files for uploading to the WBSO tool',
     long_description=long_description,

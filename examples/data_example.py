@@ -1,4 +1,4 @@
-from wbso_lib import event
+from gowbso import event
 
 meeting_type = 'meeting-standup'
 training_story = 'Learning and Training'
