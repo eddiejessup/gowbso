@@ -1,10 +1,8 @@
-GOWBSO
-======
+# GOWBSO
 
 Make CSV files for uploading to the WBSO tool.
 
-Installation
-============
+## Installation
 
 Assuming you have pip installed, you can run
 
@@ -22,8 +20,7 @@ export PATH=~/.local/bin:$PATH
 
 Now check that the `gowbso` script is available by trying `gowbso --help`. If you see usage information, everything went fine. If you get something like 'command not found', then everything went not fine.
 
-Usage
-=====
+## Usage
 
 The command `gowbso` takes as its main argument a specifier of a Python module, containing data describing a week of events. This argument can be either:
 
@@ -40,8 +37,7 @@ gowbso ~/admin/wbso/wbso_data.py
 gowbso --monday 2017-02-27 wbso_data
 ```
 
-Data module structure
-=====================
+## Data module structure
 
 This module should define a function, `get_events(mon, tue, wed, thur, fri)`. The function should return an iterable, such as a list or a generator, of `event` objects.
 
