@@ -49,6 +49,8 @@ e = gowbso.event(date=wed, type='meeting-standup', desc='Team stand-up',
                  story='Predict world happiness', duration='20m')
 ```
 
-- `date`: A datetime object for the day when the event occurred. Objects corresponding to each day of the week are available as arguments to the function.
+- `date`: A datetime object for the day when the event occurred. Objects corresponding to each day of the week are available as arguments to the `get_events` function.
 - `type`, `story`, `desc`: Details of the event, as strings
-- `duration`: The duration of the event in minutes, as a string like '120m', for 120 minute duration.
+- `duration`: The duration of the event in minutes, as a string like `'120m'`, for 120 minute duration.
+
+An example module can be seen [here](https://github.com/eddiejessup/gowbso/blob/master/examples/data_example.py).
