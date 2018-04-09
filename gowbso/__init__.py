@@ -1,1 +1,1 @@
-from .wbso_lib import event
+from .writer import WEEK_DAY_NAMES, WBSOWriter  # noqa

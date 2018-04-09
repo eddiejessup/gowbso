@@ -1,4 +1,4 @@
-from gowbso import event
+from gowbso import WEEK_DAY_NAMES, WBSOWriter
 
 meeting_type = 'meeting-standup'
 training_story = 'Learning and Training'
@@ -9,54 +9,46 @@ hackathon_type = 'coding'
 hackathon_story = 'Hackathon'
 
 
-def get_events(*week_days):
-    """Get events during the week.
+mon, tue, wed, thur, fri = WEEK_DAY_NAMES
+wbso = WBSOWriter()
 
-    Args:
-        *week_days (iterable<string>): Week days, starting Monday,
-            formatted as required by the WBSO tool.
-    Returns:
-        events (iterable)
-    """
-    mon, tue, wed, thur, fri = week_days
+# Work.
+for day in WEEK_DAY_NAMES:
+    wbso.add(day=day, type_='planning', desc='Plan',
+             story=work_story, duration='60m')
+    wbso.add(day=day, type_=work_type,
+             desc='Action',
+             story=work_story, duration='360m')
 
-    work_days = [mon, tue, wed, thur, fri]
+# Meetings
+wbso.add(day=wed, type_=meeting_type, desc='One-on-one',
+         story=work_story, duration='60m')
+wbso.add(day=mon, type_=meeting_type, desc='Team planning meeting',
+         story=work_story, duration='60m')
+stand_up_days = [tue, wed, thur]
+for day in stand_up_days:
+    wbso.add(day=day, type_=meeting_type, desc='Discussing work',
+             story=work_story, duration='30m')
+wbso.add(day=wed, type_=meeting_type, desc='Knowledge sharing',
+         story=work_story, duration='60m')
+# wbso.add(day=wed, type_=meeting_type, desc='Retrospective',
+#          story=work_story, duration='120m')
+# wbso.add(day=fri, type_=meeting_type, desc='Tech all-hands',
+#          story=work_story, duration='90m')
+wbso.add(day=fri, type_=meeting_type, desc='FEA Highlights',
+         story=work_story, duration='60m')
 
-    # Work.
-    for day in work_days:
-        yield event(date=day, type='planning', desc='Plan',
-                    story=work_story, duration='60m')
-        yield event(date=day, type=work_type,
-                    desc='Action',
-                    story=work_story, duration='360m')
+# Talks
+wbso.add(day=mon, type_=training_type, desc='Analytics talk',
+         story=training_story, duration='40m')
+wbso.add(day=mon, type_=training_type, desc='Machine learning talk',
+         story=training_story, duration='60m')
+wbso.add(day=thur, type_=training_type,
+         desc='Experiment Tool Highlights sessions',
+         story=training_story, duration='60m')
 
-    # Meetings
-    yield event(date=wed, type=meeting_type, desc='One-on-one',
-                story=work_story, duration='60m')
-    yield event(date=mon, type=meeting_type, desc='Team planning meeting',
-                story=work_story, duration='60m')
-    stand_up_days = [tue, wed, thur]
-    for day in stand_up_days:
-        yield event(date=day, type=meeting_type, desc='Discussing work',
-                    story=work_story, duration='30m')
-    yield event(date=wed, type=meeting_type, desc='Knowledge sharing',
-                story=work_story, duration='60m')
-    # yield event(date=wed, type=meeting_type, desc='Retrospective',
-    #             story=work_story, duration='120m')
-    # yield event(date=fri, type=meeting_type, desc='Tech all-hands',
-    #             story=work_story, duration='90m')
-    yield event(date=fri, type=meeting_type, desc='FEA Highlights',
-                story=work_story, duration='60m')
+# Training
+# wbso.add(day=fri, type_=training_type,desc='How to use a computer',
+#          story=training_story, duration='300m')
 
-    # Talks
-    yield event(date=mon, type=training_type, desc='Analytics talk',
-                story=training_story, duration='40m')
-    yield event(date=mon, type=training_type, desc='Machine learning talk',
-                story=training_story, duration='60m')
-    yield event(date=thur, type=training_type,
-                desc='Experiment Tool Highlights sessions',
-                story=training_story, duration='60m')
-
-    # Training
-    # yield event(date=fri, type=training_type,desc='How to use a computer',
-    #             story=training_story, duration='300m')
+wbso.write()
